@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,19 +25,15 @@ public class MainActivity extends AppCompatActivity {
     private Button btnGo;
     private static final int REQUEST_CODE = 100;
     private ArrayList<String> photos;
-    private ImageView iv1,iv2,iv3,iv4,iv5,iv6;
+    private LinearLayout llShow;
+    private ArrayList<Bitmap> images;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btnGo = (Button) findViewById(R.id.btn_go);
-        iv1 = (ImageView) findViewById(R.id.iv_1);
-        iv2 = (ImageView) findViewById(R.id.iv_2);
-        iv3 = (ImageView) findViewById(R.id.iv_3);
-        iv4 = (ImageView) findViewById(R.id.iv_4);
-        iv5 = (ImageView) findViewById(R.id.iv_5);
-        iv6 = (ImageView) findViewById(R.id.iv_6);
+        llShow = (LinearLayout) findViewById(R.id.ll_show);
         btnGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,20 +53,13 @@ public class MainActivity extends AppCompatActivity {
             if(data!=null){
                 photos = data.getStringArrayListExtra(PhotoPickerActivity.KEY_SELECTED_PHOTOS);
                 Log.i("Mainactivity","====photo==>"+photos);
-                Bitmap bitmap = getImageThumbnail(photos.get(0),100,100); //从本地取图片(在sdcard中获取),后面数字值为px
-                iv1.setImageBitmap(bitmap);
-                Bitmap bitmap2 = getImageThumbnail(photos.get(1),100,100);
-                iv2.setImageBitmap(bitmap2);
-                Bitmap bitmap3 = getImageThumbnail(photos.get(2),100,100);
-                iv3.setImageBitmap(bitmap3);
-                Bitmap bitmap4 = getImageThumbnail(photos.get(3),100,100);
-                iv4.setImageBitmap(bitmap4);
-                Bitmap bitmap5 = getImageThumbnail(photos.get(4),100,100);
-                iv5.setImageBitmap(bitmap5);
-                Bitmap bitmap6 = getImageThumbnail(photos.get(5),100,100);
-                iv6.setImageBitmap(bitmap6);
                 for(int i = 0;i<photos.size();i++){
-
+                    Bitmap imageThumbnail = getImageThumbnail(photos.get(i), 100, 100);//从本地取图片(在sdcard中获取),后面数字值为px
+                    images = new ArrayList<>();
+                    images.add(imageThumbnail);
+                    ImageView imageView = new ImageView(MainActivity.this);
+                    imageView.setImageBitmap(imageThumbnail);
+                    llShow.addView(imageView);
                 }
             }
         }
