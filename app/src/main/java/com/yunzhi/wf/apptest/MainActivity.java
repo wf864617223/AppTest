@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btnGo = (Button) findViewById(R.id.btn_go);
+
         llShow = (LinearLayout) findViewById(R.id.ll_show);
         btnGo.setOnClickListener(new View.OnClickListener() {
             @Override
