@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +16,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import me.iwf.photopicker.PhotoPagerActivity;
 import me.iwf.photopicker.PhotoPickerActivity;
 import me.iwf.photopicker.utils.PhotoPickerIntent;
 
@@ -33,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btnGo = (Button) findViewById(R.id.btn_go);
-
         llShow = (LinearLayout) findViewById(R.id.ll_show);
         btnGo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.setPhotoCount(6);
                 intent.setShowCamera(true);
                 startActivityForResult(intent, REQUEST_CODE);
-
             }
         });
     }
@@ -117,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
         try {
             FileInputStream fis = new FileInputStream(url);
             return BitmapFactory.decodeStream(fis);  ///把流转化为Bitmap图片
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;
